@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+						http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+	<!-- 配置整合mybatis过程 -->
+	<!-- 1：配置数据库相关参数 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<!-- 2：数据库连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<!-- 配置数据库属性 -->
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		
+		<!-- druid连接池的私有属性 -->
+		<property name="initialSize" value="1" />
+		<property name="maxActive" value="30" />
+		<property name="minIdle" value="10" />
+		<!-- 验证数据库连接有效性 -->
+		<property name="validationQuery" value="${validationQuery}" />
+		<!-- 对于长时间不使用的连接强制关闭 -->
+		<property name="removeAbandoned" value="true"/>
+		<!-- 关闭超过30分钟的空闲连接，1800秒，也就是30分钟 -->
+		<property name="removeAbandonedTimeout" value="1800" />
+	</bean>
+	
+	<!-- 3：配置SqlSessionFactory对象 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 注入数据库连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 配置MyBatis全局配置文件 -->
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+		<!-- 扫描sql配置文件，mapper.xml文件 -->
+		<property name="mapperLocations" value="classpath:mybatis/mapper/*Mapper.xml" />
+	</bean>
+	
+	<!-- 4：配置扫描dao接口包，动态实现dao接口，注入到spring容器 -->
+	<mybatis-spring:scan base-package="cn.colg.dao" />
+</beans>

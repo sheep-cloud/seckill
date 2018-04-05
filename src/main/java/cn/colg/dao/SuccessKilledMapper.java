@@ -1,17 +1,12 @@
 package cn.colg.dao;
 
-import cn.colg.entity.SuccessKilled;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
+import cn.colg.entity.SuccessKilled;
+
 public interface SuccessKilledMapper {
-    int deleteByPrimaryKey(@Param("seckillId") String seckillId, @Param("userPhone") String userPhone);
 
-    int insert(SuccessKilled record);
+	int insertSuccessKilled(@Param("seckillId") String seckillId, @Param("userPhone") String userPhone);
 
-    SuccessKilled selectByPrimaryKey(@Param("seckillId") String seckillId, @Param("userPhone") String userPhone);
-
-    List<SuccessKilled> selectAll();
-
-    int updateByPrimaryKey(SuccessKilled record);
+	SuccessKilled findBySeckillId(@Param("seckillId") String seckillId, @Param("userPhone") String userPhone);
 }

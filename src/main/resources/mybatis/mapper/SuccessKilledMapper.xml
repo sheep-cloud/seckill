@@ -1,72 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.colg.dao.SuccessKilledMapper">
-  <resultMap id="BaseResultMap" type="cn.colg.entity.SuccessKilled">
-    <id column="seckill_id" jdbcType="VARCHAR" property="seckillId" />
-    <id column="user_phone" jdbcType="VARCHAR" property="userPhone" />
-    <result column="state" jdbcType="CHAR" property="state" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from success_killed
-    where seckill_id = #{seckillId,jdbcType=VARCHAR}
-      and user_phone = #{userPhone,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="cn.colg.entity.SuccessKilled">
-    insert into success_killed (seckill_id, user_phone, state, 
-      create_time)
-    values (#{seckillId,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, 
-      #{createTime,jdbcType=TIMESTAMP})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="cn.colg.entity.SuccessKilled">
-    update success_killed
-    set state = #{state,jdbcType=CHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where seckill_id = #{seckillId,jdbcType=VARCHAR}
-      and user_phone = #{userPhone,jdbcType=VARCHAR}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
-    select seckill_id, user_phone, state, create_time
-    from success_killed
-    where seckill_id = #{seckillId,jdbcType=VARCHAR}
-      and user_phone = #{userPhone,jdbcType=VARCHAR}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select seckill_id, user_phone, state, create_time
-    from success_killed
-  </select>
-  <resultMap id="BaseResultMap" type="cn.colg.entity.SuccessKilled">
-    <id column="seckill_id" jdbcType="VARCHAR" property="seckillId" />
-    <id column="user_phone" jdbcType="VARCHAR" property="userPhone" />
-    <result column="state" jdbcType="TINYINT" property="state" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from success_killed
-    where seckill_id = #{seckillId,jdbcType=VARCHAR}
-      and user_phone = #{userPhone,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="cn.colg.entity.SuccessKilled">
-    insert into success_killed (seckill_id, user_phone, state, 
-      create_time)
-    values (#{seckillId,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, 
-      #{createTime,jdbcType=TIMESTAMP})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="cn.colg.entity.SuccessKilled">
-    update success_killed
-    set state = #{state,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where seckill_id = #{seckillId,jdbcType=VARCHAR}
-      and user_phone = #{userPhone,jdbcType=VARCHAR}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
-    select seckill_id, user_phone, state, create_time
-    from success_killed
-    where seckill_id = #{seckillId,jdbcType=VARCHAR}
-      and user_phone = #{userPhone,jdbcType=VARCHAR}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select seckill_id, user_phone, state, create_time
-    from success_killed
-  </select>
+	<resultMap id="BaseResultMap" type="cn.colg.entity.SuccessKilled">
+		<id column="seckill_id" jdbcType="VARCHAR" property="seckillId" />
+		<id column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+		<result column="state" jdbcType="CHAR" property="state" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	</resultMap>
+
+	<insert id="insertSuccessKilled">
+		<!-- IGNORE 主键冲突，忽略，返回0 -->
+		<!-- 状态标识（-1：无效，0：成功，1：已付款） -->
+		INSERT IGNORE INTO success_killed(seckill_id, user_phone, state)
+		VALUES(#{seckillId}, #{userPhone}, 0)
+	</insert>
+	
+	<select id="findBySeckillId" resultType="cn.colg.entity.SuccessKilled">
+		<!-- 根据id查询SuccessKilled并携带秒杀产品对象实体 -->
+		<!-- 如何告诉MyBatis把结果映射到SuccessKilled同时映射seckill属性 -->
+		<!-- 可以自由控制SQL -->
+		SELECT
+			sk.seckill_id, sk.user_phone, sk.state, sk.create_time,
+			s.seckill_id 'seckill.seckill_id', s.name 'seckill.name', s.number 'seckill.number',
+			s.start_time 'seckill.start_time', s.end_time 'seckill.end_time', s.create_time 'seckill.create_time'
+		FROM success_killed sk
+		INNER JOIN seckill s ON sk.seckill_id = s.seckill_id
+		WHERE sk.seckill_id = #{seckillId} AND sk.user_phone = #{userPhone}
+	</select>
 </mapper>

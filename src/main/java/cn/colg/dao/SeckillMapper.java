@@ -1,16 +1,17 @@
 package cn.colg.dao;
 
-import cn.colg.entity.Seckill;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import cn.colg.entity.Seckill;
+
 public interface SeckillMapper {
-    int deleteByPrimaryKey(String seckillId);
 
-    int insert(Seckill record);
+	int reduceNumber(@Param("seckillId") String seckillId, @Param("killTime") Date killTime);
 
-    Seckill selectByPrimaryKey(String seckillId);
+	Seckill findById(@Param("seckillId") String seckillId);
 
-    List<Seckill> selectAll();
-
-    int updateByPrimaryKey(Seckill record);
+	List<Seckill> querySeckill(@Param("offet") int offet, @Param("limit") int limit);
 }

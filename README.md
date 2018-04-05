@@ -1,5 +1,4 @@
 # Java高并发秒杀API
----
 
 ## 慕课网课程：
 1. [Java高并发秒杀API之业务分析与DAO层 ](https://www.imooc.com/learn/630)
