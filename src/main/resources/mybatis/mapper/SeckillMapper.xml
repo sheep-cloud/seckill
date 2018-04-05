@@ -31,4 +31,10 @@
 		ORDER BY s.create_time DESC
 		LIMIT #{offet}, #{limit}
 	</select>
+	
+	<select id="findNameById" resultType="String">
+		SELECT s.name
+		FROM seckill s
+		WHERE s.seckill_id = #{seckillId}
+	</select>
 </mapper>

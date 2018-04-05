@@ -1,12 +1,17 @@
-package cn.colg.dao;
+package cn.colg.core;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.colg.dao.SeckillMapper;
+import cn.colg.dao.SuccessKilledMapper;
+import cn.colg.service.SeckillService;
+import cn.colg.service.SuccessKilledService;
+
 /**
- * tester的基类，建议所有实体类都继承
+ * 基础测试类，单元测试继承该类即可
  * 
  * spring-test, junit
  * 
@@ -18,9 +23,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = { "classpath:spring/spring-*.xml" }) // 告诉junit sprign配置文件位置
 public abstract class BaseTester {
 
-	/**
-	 * 注入mapper实现类依赖
-	 */
+	// 注入service
+	@Autowired
+	protected SeckillService seckillService;
+	@Autowired
+	protected SuccessKilledService successKilledService;
+
+	// 注入mapper
 	@Autowired
 	protected SeckillMapper seckillMapper;
 	@Autowired

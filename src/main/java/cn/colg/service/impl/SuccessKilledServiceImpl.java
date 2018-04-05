@@ -1,11 +1,13 @@
 package cn.colg.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import cn.colg.dao.SuccessKilledMapper;
 import cn.colg.entity.SuccessKilled;
 import cn.colg.service.SuccessKilledService;
 
+@Service
 public class SuccessKilledServiceImpl implements SuccessKilledService {
 	
 	@Autowired

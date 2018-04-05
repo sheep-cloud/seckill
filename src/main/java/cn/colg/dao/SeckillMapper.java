@@ -14,4 +14,6 @@ public interface SeckillMapper {
 	Seckill findById(@Param("seckillId") String seckillId);
 
 	List<Seckill> querySeckill(@Param("offet") int offet, @Param("limit") int limit);
+	
+	String findNameById(@Param("seckillId") String seckillId);
 }

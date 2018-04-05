@@ -9,7 +9,7 @@
 
 	<!-- 配置整合mybatis过程 -->
 	<!-- 1：配置数据库相关参数 -->
-	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<context:property-placeholder location="classpath:conf/*.properties"/>
 	<!-- 2：数据库连接池 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
 		<!-- 配置数据库属性 -->

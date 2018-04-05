@@ -2,6 +2,7 @@ package cn.colg.dao;
 
 import org.junit.Test;
 
+import cn.colg.core.BaseTester;
 import cn.colg.entity.SuccessKilled;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
@@ -20,15 +21,17 @@ public class SuccessKilledMapperTest extends BaseTester {
 	@Test
 	public void testInsertSuccessKilled() {
 		String seckillId = "c18c169938c311e89fa754ee75c6aeb0";
-		int result = successKilledMapper.insertSuccessKilled(seckillId, "95205246715");
-		log.info("插入购买明细，可过滤重复：{}", result);
+		String userPhone = "18701012345";
+		int insertCount = successKilledMapper.insertSuccessKilled(seckillId, userPhone);
+		log.info("insertCount： {}", insertCount);
 	}
 
 	@Test
 	public void testFindBySeckillId() {
 		String seckillId = "c18c169938c311e89fa754ee75c6aeb0";
-		SuccessKilled successKilled = successKilledMapper.findBySeckillId(seckillId, "95205246715");
-		log.info("根据id查询SuccessKilled并携带秒杀产品对象实体：{}", successKilled);
+		String userPhone = "18701012345";
+		SuccessKilled successKilled = successKilledMapper.findBySeckillId(seckillId, userPhone);
+		log.info("successKilled：{}", successKilled);
 	}
 
 }
