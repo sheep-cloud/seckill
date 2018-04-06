@@ -41,7 +41,7 @@ public class SeckillServiceImpl extends BaseServiceImpl implements SeckillServic
 	@Override
 	public List<Seckill> querySeckill() {
 		// 只查询4个
-		return seckillMapper.querySeckill(0, 4);
+		return seckillMapper.querySeckill(0, 100);
 	}
 
 	@Override

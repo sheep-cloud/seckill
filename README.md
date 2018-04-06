@@ -40,14 +40,21 @@ PRIMARY KEY (seckill_id, user_phone),
 	}
 ```
 执行结果：
-- 第一次：`INFO cn.colg.dao.SuccessKilledMapperTest - insertCount： 1`    表示插入成功
-- 第二次：`INFO cn.colg.dao.SuccessKilledMapperTest - insertCount： 0`    表示插入失败
+1. 第一次：`INFO cn.colg.dao.SuccessKilledMapperTest - insertCount： 1`    表示插入成功
+2. 第二次：`INFO cn.colg.dao.SuccessKilledMapperTest - insertCount： 0`    表示插入失败
+
 #####使用注解控制事务方法的优点
 ```
 	<!-- 配置基于注解的声明式事务  - 默认使用注解来管理事务行为 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED) ：如果有事务, 那么加入事务, 没有的话新建一个(默认情况下)
+	@Transactional(propagation=Propagation.NOT_SUPPORTED) ：容器不为这个方法开启事务
+	@Transactional(propagation=Propagation.REQUIRES_NEW) ：不管是否存在事务,都创建一个新的事务,原来的挂起,新的执行完毕,继续执行老的事务
+	@Transactional(propagation=Propagation.MANDATORY) ：必须在一个已有的事务中执行,否则抛出异常
+	@Transactional(propagation=Propagation.NEVER) ：必须在一个没有的事务中执行,否则抛出异常(与Propagation.MANDATORY相反)
+	@Transactional(propagation=Propagation.SUPPORTS) ：如果其他bean调用这个方法,在其他bean中声明事务,那就用事务.如果其他bean没有声明事务,那就不用事务.
+	@Transactional(timeout=30) //默认是30秒
 ```
 1. 开发团队达成一致的风格，明确标注事务方法的编程风格。
 2. 保证事务方法的执行时间尽可能短，不要穿插其他网络操作RPC/HTTP请求或者剥离到事务方法外部。
@@ -59,3 +66,10 @@ PRIMARY KEY (seckill_id, user_phone),
 ![这里写图片描述](https://img-blog.csdn.net/20180406050804438?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05vclJpbkluVGhlU2t5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ####秒杀API的URL设计
 ![这里写图片描述](https://img-blog.csdn.net/20180406051459176?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05vclJpbkluVGhlU2t5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+######错误处理
+[According to TLD or attribute directive in tag file, attribute value does not accept any expressions](https://blog.csdn.net/jasper_success/article/details/6693434)
+```
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>		改为	<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt"%>	改为	<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+```
