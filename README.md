@@ -63,6 +63,6 @@ PRIMARY KEY (seckill_id, user_phone),
 ######错误处理
 [According to TLD or attribute directive in tag file, attribute value does not accept any expressions](https://blog.csdn.net/jasper_success/article/details/6693434)
 ```
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>		改为	<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>	改为	<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt"%>	改为	<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 ```
