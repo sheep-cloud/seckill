@@ -15,12 +15,12 @@
 #### 代码开发阶段
 - [Dao设计编码：接口设计+SQL编写](https://github.com/colg-cloud/seckill/tree/master/src/main/java/cn/colg/dao)
 - [Service设计编码：业务逻辑实现](https://github.com/colg-cloud/seckill/tree/master/src/main/java/cn/colg/service)
-- Web设计编码
+- [Web设计编码：前端业务交互](https://github.com/colg-cloud/seckill/tree/master/src/main/java/cn/colg/web)
 
 ---
 
 #### 技术总结
-#####联合主键，避免重复秒杀
+##### 联合主键，避免重复秒杀
 ```
 -- 秒杀成功明细表
 -- 联合主键
