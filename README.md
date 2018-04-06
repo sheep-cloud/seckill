@@ -43,7 +43,7 @@ PRIMARY KEY (seckill_id, user_phone),
 1. 第一次：`INFO cn.colg.dao.SuccessKilledMapperTest - insertCount： 1`    表示插入成功
 2. 第二次：`INFO cn.colg.dao.SuccessKilledMapperTest - insertCount： 0`    表示插入失败
 
-#####使用注解控制事务方法的优点
+##### 使用注解控制事务方法的优点
 ```
 	<!-- 配置基于注解的声明式事务  - 默认使用注解来管理事务行为 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
@@ -60,14 +60,14 @@ PRIMARY KEY (seckill_id, user_phone),
 2. 保证事务方法的执行时间尽可能短，不要穿插其他网络操作RPC/HTTP请求或者剥离到事务方法外部。
 3. 不是所有的方法都需要事务，如：只有一条修改操作，只读操作不需要事务控制
 
-######错误处理
+###### 错误处理
 [According to TLD or attribute directive in tag file, attribute value does not accept any expressions](https://blog.csdn.net/jasper_success/article/details/6693434)
 ```
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>	改为	<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt"%>	改为	<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 ```
 
-####使用说明
+#### 使用说明
 1. 首先从github上把项目传到本地，可以直接下载项目的压缩包，点击Clone or download,然后Download Zip。也可以通过git，使用git clone  https://github.com/YuanTianxin/seckill.git 命令，把项目克隆到本地
 2. 然后修改数据库连接信息，在resources目录下jdbc.properties配置文件中修改
 3. 使用maven tomcat7插件启动项目， 进入项目目录，打开cmd输入：`mvn tomcat7:run`
