@@ -60,13 +60,6 @@ PRIMARY KEY (seckill_id, user_phone),
 2. 保证事务方法的执行时间尽可能短，不要穿插其他网络操作RPC/HTTP请求或者剥离到事务方法外部。
 3. 不是所有的方法都需要事务，如：只有一条修改操作，只读操作不需要事务控制
 
-#### 前端页面流程
-![这里写图片描述](https://img-blog.csdn.net/20180406050614687?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05vclJpbkluVGhlU2t5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-####详情页流程逻辑
-![这里写图片描述](https://img-blog.csdn.net/20180406050804438?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05vclJpbkluVGhlU2t5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-####秒杀API的URL设计
-![这里写图片描述](https://img-blog.csdn.net/20180406051459176?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05vclJpbkluVGhlU2t5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
 ######错误处理
 [According to TLD or attribute directive in tag file, attribute value does not accept any expressions](https://blog.csdn.net/jasper_success/article/details/6693434)
 ```
