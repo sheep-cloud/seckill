@@ -94,7 +94,7 @@ public class SeckillServiceImpl extends BaseServiceImpl implements SeckillServic
 	public SeckillExecution executeSeckill(String seckillId, String userPhone, String md5)
 			throws SeckillException, RepeatKillException, SeckillCloseException {
 		if (StrUtil.isBlank(md5) || !md5.equals(getMd5(seckillId))) {
-			// md5不同，描写的数据被改写
+			// md5不同，秒杀的数据被改写
 			throw new SeckillException("seckill data rewrite");
 		}
 
