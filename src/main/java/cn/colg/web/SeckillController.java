@@ -24,8 +24,13 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 
+/**
+ * // url：模块/资源/{id}/细分 /seckill/list
+ *
+ * @author colg
+ */
 @Controller
-@RequestMapping("/seckill") // url：模块/资源/{id}/细分 /seckill/list
+@RequestMapping("/seckill")
 public class SeckillController extends BaseController {
 
 	private static final Log log = LogFactory.get();
@@ -42,7 +47,8 @@ public class SeckillController extends BaseController {
 		List<Seckill> list = seckillService.querySeckill();
 		model.addAttribute("list", list);
 		// list.jsp + model = ModelAndView
-		return "list";// WEB-INF/jsp/"list".jsp
+		// WEB-INF/jsp/"list".jsp
+		return "list";
 	}
 
 	/**
@@ -54,7 +60,8 @@ public class SeckillController extends BaseController {
 	@GetMapping("/{seckillId}/detail")
 	public String detail(@PathVariable(required = false) String seckillId, Model model) {
 		if (StrUtil.isBlank(seckillId)) {
-			return "redirect:/seckill/list";// 重定向到 list
+			// 重定向到 list
+			return "redirect:/seckill/list";
 		}
 
 		Seckill seckill = seckillService.findById(seckillId);
@@ -96,14 +103,13 @@ public class SeckillController extends BaseController {
 	 */
 	@PostMapping("/{seckillId}/{md5}/execution")
 	@ResponseBody
-	public SeckillResult<SeckillExecution> execute( @PathVariable("seckillId") String seckillId,
-													@PathVariable("md5") String md5,
-													@CookieValue(value = "killPhone", required = false) String phone) {
+	public SeckillResult<SeckillExecution> execute(@PathVariable("seckillId") String seckillId, @PathVariable("md5") String md5,
+			@CookieValue(value = "killPhone", required = false) String phone) {
 		// springmvc valid
 		if (StrUtil.isBlank(phone)) {
 			return new SeckillResult<>(false, "未注册");
 		}
-		
+
 		SeckillResult<SeckillExecution> result;
 		try {
 			SeckillExecution seckillExecution = seckillService.executeSeckill(seckillId, phone, md5);
@@ -120,7 +126,7 @@ public class SeckillController extends BaseController {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 获取系统时间
 	 * 

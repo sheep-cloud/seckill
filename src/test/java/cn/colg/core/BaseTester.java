@@ -19,17 +19,21 @@ import cn.colg.service.SuccessKilledService;
  *
  * @author colg
  */
-@RunWith(SpringJUnit4ClassRunner.class) // junit启动时加载springIOC容器
-@ContextConfiguration(locations = { "classpath:spring/spring-*.xml" }) // 告诉junit sprign配置文件位置
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:spring/spring-*.xml" })
 public abstract class BaseTester {
 
-	// 注入service
+	/**
+	 * 注入service
+	 */
 	@Autowired
 	protected SeckillService seckillService;
 	@Autowired
 	protected SuccessKilledService successKilledService;
 
-	// 注入mapper
+	/**
+	 * 注入mapper
+	 */
 	@Autowired
 	protected SeckillMapper seckillMapper;
 	@Autowired
