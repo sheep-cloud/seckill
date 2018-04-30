@@ -13,9 +13,10 @@ import cn.colg.service.SuccessKilledService;
 /**
  * 基础测试类，单元测试继承该类即可
  * 
+ * <pre>
  * spring-test, junit
- * 
  * 配置 Spring 和 Junit 整合
+ * </pre>
  *
  * @author colg
  */

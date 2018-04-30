@@ -14,6 +14,11 @@ import cn.colg.exception.SeckillException;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 
+/**
+ * 秒杀Service 测试
+ *
+ * @author colg
+ */
 public class SeckillServiceTest extends BaseTester {
 
 	private static final Log log = LogFactory.get();
