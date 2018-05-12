@@ -64,7 +64,6 @@ var seckill = {
 					// 获取秒杀地址
 					var md5 = exposer["md5"];
 					var killUrl = seckill.URL.execution(seckillId, md5);
-					console.log(killUrl); // TODO colg
 					// click 事件只能点击一次，防止用户重复点击
 					$("#killBtn").one("click", function() {
 						// 执行秒杀请求
@@ -91,8 +90,6 @@ var seckill = {
 					// 重新计算计时逻辑
 					seckill.countdown(seckillId, now, startTime, endTime);
 				}
-			} else {
-				console.log("result: " + result); // TODO colg
 			}
 		});
 	},
@@ -155,7 +152,6 @@ var seckill = {
 				});
 				$("#killPhoneBtn").click(function() {
 					var inputPhone = $("#killphoneKey").val();
-					console.log("inputPhone=" + inputPhone); // TODO colg
 					if (seckill.validatePhone(inputPhone)) {
 						// 手机号码写入cookie，7天，有效路径
 						$.cookie("killPhone", inputPhone, {
@@ -177,8 +173,6 @@ var seckill = {
 					var nowTime = result["data"];
 					// 时间判断
 					seckill.countdown(seckillId, nowTime, startTime, endTime);
-				} else {
-					console.log("result: " + result); // TODO colg
 				}
 			});
 		}
